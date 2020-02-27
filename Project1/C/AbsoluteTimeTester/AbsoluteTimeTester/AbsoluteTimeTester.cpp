@@ -3,18 +3,23 @@
 #include <vector>
 #include <chrono> 
 #include <Windows.h>
+#include "noOptimize.h"
+
 using namespace std::chrono;
 
 const std::string DATA_SOURCE_FILE_PATH = "..\\..\\..\\DataSource\\data.txt";
 const std::string DATA_DESTINATION_FILE_PATH = "..\\..\\..\\Output\\result_cpp.txt";
-const int NUMBER_OF_ITERATION = 100000000;
+const int NUMBER_OF_ITERATION = 100000;
+int currentAbsValueNoOptimize = 0;
+
 
 int absImpl(int x);
 std::vector<int> readDataFile();
 void saveResultsToFile(std::vector<int>);
 void performExperiment();
-long testEmptyLoop();
-long testRealData();
+
+long testEmptyLoop(std::vector<int>);
+long testRealData(std::vector<int>);
 
 int main() {
 	performExperiment();
@@ -55,32 +60,36 @@ std::vector<int> readDataFile() {
 }
 
 void performExperiment() {
+	std::vector<int> data = readDataFile();
 	std::cout << "Starting experiment: " << std::endl;
-	long emptyLoopTime = testEmptyLoop();
+	long emptyLoopTime = testEmptyLoop(data);
 	double emptyLoopOneIterationTime = ((double)emptyLoopTime) / NUMBER_OF_ITERATION;
-	long realDataTime = testRealData();
+	long realDataTime = testRealData(data);
 	double realDataAverageTime = ((double)realDataTime) / NUMBER_OF_ITERATION;
 	long experimentTime = emptyLoopTime + realDataTime;
 
 
 	std::cout << "Experiment took " << experimentTime << "ms (" << experimentTime / 1000.0 << "s)" << std::endl;
 	std::cout << "Average experiment time from "<< NUMBER_OF_ITERATION <<" interations: " << realDataAverageTime - emptyLoopOneIterationTime << "ms" <<std::endl;
+	std::cout << "Real data time: " << realDataTime << "ms, Empty loop time: " << emptyLoopTime << "ms" << std::endl;
+	std::cout << "Last calculated value: " << currentAbsValueNoOptimize << std::endl;
 }
 
-void donotoptimize() {}
 
-long testEmptyLoop() {
+long testEmptyLoop(std::vector<int> data) {
 	auto start = high_resolution_clock::now();
-	//TODO: Perform operation - fake loop - 
-	for (int i = 0; i < NUMBER_OF_ITERATION; i++) { donotoptimize(); }
+	for (int i = 0; i < NUMBER_OF_ITERATION; i++) { 
+		for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+			volatile int x = i;
+		} 
+	}
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<milliseconds>(stop - start);
 
 	return duration.count();
 }
 
-long testRealData() {
-	std::vector<int> data = readDataFile();
+long testRealData(std::vector<int> data) {
 	std::vector<int> result = std::vector<int>();
 	auto start = high_resolution_clock::now();
 	for (int i = 0; i < NUMBER_OF_ITERATION; i++) {
@@ -88,7 +97,7 @@ long testRealData() {
 			if (i == NUMBER_OF_ITERATION - 1) {
 				result.push_back(absImpl(*it));
 			} else {
-				absImpl(*it);
+				currentAbsValueNoOptimize = absImpl(*it);
 			}
 			
 		}

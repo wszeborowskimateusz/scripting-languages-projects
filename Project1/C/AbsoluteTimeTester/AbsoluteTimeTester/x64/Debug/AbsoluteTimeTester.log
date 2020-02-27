@@ -1,12 +1,14 @@
 ﻿  AbsoluteTimeTester.cpp
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         with
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         [
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:             _Rep=__int64
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         ]
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         with
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         [
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:             _Rep=__int64
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         ]
-  AbsoluteTimeTester.vcxproj -> C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\x64\Debug\AbsoluteTimeTester.exe
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(88,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(88,23): warning C4244:         with
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(88,23): warning C4244:         [
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(88,23): warning C4244:             _Rep=__int64
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(88,23): warning C4244:         ]
+  noOptimize.cpp
+  Generating Code...
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(110,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(110,23): warning C4244:         with
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(110,23): warning C4244:         [
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(110,23): warning C4244:             _Rep=__int64
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(110,23): warning C4244:         ]
+  AbsoluteTimeTester.vcxproj -> C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\x64\Debug\AbsoluteTimeTester.exe

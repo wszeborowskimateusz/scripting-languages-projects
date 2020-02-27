@@ -1,17 +1,17 @@
 ﻿  AbsoluteTimeTester.cpp
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         with
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         [
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:             _Rep=__int64
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(79,23): warning C4244:         ]
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         with
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         [
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:             _Rep=__int64
-C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(102,23): warning C4244:         ]
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(89,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(89,23): warning C4244:         with
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(89,23): warning C4244:         [
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(89,23): warning C4244:             _Rep=__int64
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(89,23): warning C4244:         ]
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(111,23): warning C4244: 'return': conversion from '_Rep' to 'long', possible loss of data
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(111,23): warning C4244:         with
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(111,23): warning C4244:         [
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(111,23): warning C4244:             _Rep=__int64
+C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\AbsoluteTimeTester\AbsoluteTimeTester.cpp(111,23): warning C4244:         ]
   Generating code
-  4 of 253 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+  3 of 252 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  AbsoluteTimeTester.vcxproj -> C:\Users\Mateusz\Google Drive\Magister\1Semestr\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\x64\Release\AbsoluteTimeTester.exe
+  AbsoluteTimeTester.vcxproj -> C:\Users\Mateusz\Desktop\Studia\Magister\Języki Skryptowe\Project\Project1\C\AbsoluteTimeTester\x64\Release\AbsoluteTimeTester.exe
