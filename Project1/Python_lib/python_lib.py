@@ -2,7 +2,7 @@ import time
 
 DATA_SOURCE_FILE_PATH = "..\\DataSource\\data.txt"
 DATA_DESTINATION_FILE_PATH = "..\\Output\\result_python_lib.txt"
-NUMBER_OF_ITERATION = 100
+NUMBER_OF_ITERATION = 20
 
 
 def read_data_file():

@@ -1,11 +1,11 @@
 import random
 
-start = -2147483648
+start = -2147483647
 stop = 2147483647
-limit = 100000
+limit = 100000000
 
-randomListOfIntegers = [random.randint(start, stop) for _ in range(limit)]
+random_list_of_integer = [random.randint(start, stop) for _ in range(limit)]
 
 with open("data.txt", "w") as txt_file:
-    for number in randomListOfIntegers:
+    for number in random_list_of_integer:
         txt_file.write(str(number) + "\n")

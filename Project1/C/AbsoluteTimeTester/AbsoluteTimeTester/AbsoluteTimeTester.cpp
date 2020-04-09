@@ -9,8 +9,9 @@ using namespace std::chrono;
 
 const std::string DATA_SOURCE_FILE_PATH = "..\\..\\..\\DataSource\\data.txt";
 const std::string DATA_DESTINATION_FILE_PATH = "..\\..\\..\\Output\\result_cpp.txt";
-const int NUMBER_OF_ITERATION = 100000;
+const int NUMBER_OF_ITERATION = 1;
 int currentAbsValueNoOptimize = 0;
+int emptyLoopNoOptimize = 0;
 
 
 int absImpl(int x);
@@ -73,6 +74,7 @@ void performExperiment() {
 	std::cout << "Average experiment time from "<< NUMBER_OF_ITERATION <<" interations: " << realDataAverageTime - emptyLoopOneIterationTime << "ms" <<std::endl;
 	std::cout << "Real data time: " << realDataTime << "ms, Empty loop time: " << emptyLoopTime << "ms" << std::endl;
 	std::cout << "Last calculated value: " << currentAbsValueNoOptimize << std::endl;
+	std::cout << "Last calculated value: " << emptyLoopNoOptimize << std::endl;
 }
 
 
@@ -80,12 +82,13 @@ long testEmptyLoop(std::vector<int> data) {
 	auto start = high_resolution_clock::now();
 	for (int i = 0; i < NUMBER_OF_ITERATION; i++) { 
 		for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
-			volatile int x = i;
-		} 
+			if ((*it) + i == 0) {
+				std::cout << *it << std::endl;
+			}
+		}
 	}
 	auto stop = high_resolution_clock::now();
 	auto duration = duration_cast<milliseconds>(stop - start);
-
 	return duration.count();
 }
 
@@ -94,6 +97,11 @@ long testRealData(std::vector<int> data) {
 	auto start = high_resolution_clock::now();
 	for (int i = 0; i < NUMBER_OF_ITERATION; i++) {
 		for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it) {
+			// This part is here to be consistent with empty loop time
+			if ((*it) + i == 0) {
+				std::cout << *it << std::endl;
+			}
+			// End of part
 			if (i == NUMBER_OF_ITERATION - 1) {
 				result.push_back(absImpl(*it));
 			} else {
@@ -107,6 +115,5 @@ long testRealData(std::vector<int> data) {
 	auto duration = duration_cast<milliseconds>(stop - start);
 
 	saveResultsToFile(result);
-
 	return duration.count();
 }

@@ -2,7 +2,7 @@ import time
 
 DATA_SOURCE_FILE_PATH = "..\\DataSource\\data.txt"
 DATA_DESTINATION_FILE_PATH = "..\\Output\\result_python_custom.txt"
-NUMBER_OF_ITERATION = 100
+NUMBER_OF_ITERATION = 20
 
 
 def abs_impl(x):
@@ -47,8 +47,8 @@ def test_real_data(data):
 
 
 def run_experiment():
-    print("Starting experiment")
     data = read_data_file()
+    print("Starting experiment")
     empty_loop_time = test_empty_loop(data) * 1000
     real_data_time = test_real_data(data) * 1000
     empty_loop_one_iteration_time = empty_loop_time / NUMBER_OF_ITERATION
