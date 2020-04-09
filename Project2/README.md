@@ -1,0 +1,1 @@
+This project is about to create a C extension for Python to represent small Graphs of at most 16 vertices
