@@ -1,0 +1,1 @@
+This project is about to create a simple file explorer with GUI in PyQT and PyGTK
