@@ -8,7 +8,11 @@ import platform
 import subprocess
 import shutil
 from datetime import datetime
-from pwd import getpwuid
+try:
+    from pwd import getpwuid
+except ImportError:
+    # This module is not crucial and it only works on Linux
+    pass
 import time
 from gi import require_version
 
@@ -225,7 +229,8 @@ class FilesTree():
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
             text += f'Data edycji: {time.ctime(os.path.getmtime(path))}\n'
-            text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
+            if platform == "linux" or platform == "linux2":
+                text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text
         except:

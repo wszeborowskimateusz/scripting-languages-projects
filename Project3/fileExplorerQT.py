@@ -7,7 +7,11 @@ import platform
 import subprocess
 import shutil
 import time
-from pwd import getpwuid
+try:
+    from pwd import getpwuid
+except ImportError:
+    # This module is not crucial and it only works on Linux
+    pass
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -168,7 +172,8 @@ class Browser(QWidget):
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
             text += f'Data edycji: {time.ctime(os.path.getmtime(path))}\n'
-            text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
+            if platform == "linux" or platform == "linux2":
+                text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text
         except:
