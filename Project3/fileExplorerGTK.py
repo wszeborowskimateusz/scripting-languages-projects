@@ -20,6 +20,7 @@ require_version( 'Gtk', '3.0' )
 from gi.repository import Gtk, Gdk, Gio
 from gi.repository.GdkPixbuf import Pixbuf
 
+
 HELP_GUIDE = '''
 Możliwe funkcje w programie:
 - Menu Folder - pozwala na otworzenie nowego folderu jako folder root
@@ -55,13 +56,11 @@ def show_info_popup(window, title, text):
     dialog.destroy()
 
 def show_yes_no_popup(window, title, text, onYes):
-    dialog = Gtk.MessageDialog(
-        window,
-        0,
-        Gtk.MessageType.QUESTION,
-        Gtk.ButtonsType.YES_NO,
-        title,
-    )
+    dialog = Gtk.MessageDialog()
+    dialog.set_parent(window)
+    dialog.set_title(title)
+    dialog.add_button("Tak", Gtk.ResponseType.YES)
+    dialog.add_button("Nie", Gtk.ResponseType.NO)
     dialog.format_secondary_text(text)
     response = dialog.run()
     if response == Gtk.ResponseType.YES:
@@ -228,13 +227,18 @@ class FilesTree():
                 text += 'Typ: Folder\n'
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
-            text += f'Data edycji: {time.ctime(os.path.getmtime(path))}\n'
+            text += f'Data edycji: {self.__get_formated_modified_date(path)}\n'
             if platform == "linux" or platform == "linux2":
                 text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text
         except:
             return NO_PROPERTIES_AVAILABLE
+
+    def __get_formated_modified_date(self, path):
+        timestamp = os.path.getmtime(path)
+        date_time = datetime.fromtimestamp(timestamp)
+        return date_time.strftime("%d.%m.%Y %H:%M")
 
     def get_new_tree_view(self, path='/'):
         self.fileSystemtree_store = self.get_new_tree_model(path)

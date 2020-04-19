@@ -7,6 +7,7 @@ import platform
 import subprocess
 import shutil
 import time
+from datetime import datetime
 try:
     from pwd import getpwuid
 except ImportError:
@@ -21,7 +22,6 @@ HELP_GUIDE = '''
 Możliwe funkcje w programie:
 - Menu Folder - pozwala na otworzenie nowego folderu jako folder root
 - Po kliknięciu w wybrany nagłówek, zawartość zostanie posortowana względem podanej wartości
-- Podwójne kliknięcie danego pliku/folderu pozwala na jeg edycję
 - Zaznaczenie pliku tekstowego pozwala na wyświetlenie jego treści
 - Menu pod prawym przyciskiem myszy:
     - Otwórz - otwiera plik/folder w okienku systemowym
@@ -98,10 +98,18 @@ class Browser(QWidget):
     def __delete_file(self, index):
         path = self.sender().model().filePath(index)
         quit_msg = f"Czy jesteś pewien, że chesz usunąć: {path}?"
-        reply = QMessageBox.question(self, 'Czy jesteś pewien?', 
-                        quit_msg, QMessageBox.Yes, QMessageBox.No)
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Question)
+        msg_box.setWindowTitle('Czy jesteś pewien?')
+        msg_box.setText(quit_msg)
+        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        yes_button = msg_box.button(QMessageBox.Yes)
+        yes_button.setText('Tak')
+        no_button = msg_box.button(QMessageBox.No)
+        no_button.setText('Nie')
+        msg_box.exec_()
 
-        if reply == QMessageBox.Yes:
+        if msg_box.clickedButton() == yes_button:
             try:
                 if os.path.isfile(path):
                     os.remove(path)
@@ -171,13 +179,19 @@ class Browser(QWidget):
                 text += 'Typ: Folder\n'
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
-            text += f'Data edycji: {time.ctime(os.path.getmtime(path))}\n'
+            text += f'Data edycji: {self.__get_formated_modified_date(path)}\n'
             if platform == "linux" or platform == "linux2":
                 text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text
         except:
             return NO_PROPERTIES_AVAILABLE
+
+    def __get_formated_modified_date(self, path):
+        timestamp = os.path.getmtime(path)
+        date_time = datetime.fromtimestamp(timestamp)
+        return date_time.strftime("%d.%m.%Y %H:%M")
+
 
 class MainLayout(QWidget):
     def __init__(self, left_widget, right_widget):
