@@ -40,7 +40,6 @@ Autor: Mateusz Wszeborowski 165562
 CANNOT_OPEN_FILE_DISCLAIMER = 'Nie udało się otworzyć pliku. Najprawdopodobniej nie jest to plik tekstowy.'
 EMPTY_FILE_DISCLAIMER = 'Wybrany plik jest pusty.'
 NO_PERMISSION_FILE_DISCLAIMER = 'Nie masz uprawnień aby otworzyć ten plik.'
-NO_PERMISSI__on_file_delete_DISCLAIMER = 'Nie masz uprawnień aby usunąć ten plik.'
 NO_PROPERTIES_AVAILABLE = 'Nie udało się wczytać właściwości pliku.'
 
 def show_info_popup(window, title, text):
@@ -228,7 +227,7 @@ class FilesTree():
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
             text += f'Data edycji: {self.__get_formated_modified_date(path)}\n'
-            if platform == "linux" or platform == "linux2":
+            if sys.platform == "linux" or sys.platform == "linux2":
                 text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text

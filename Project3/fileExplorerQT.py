@@ -180,7 +180,7 @@ class Browser(QWidget):
             file_stats = os.stat(path)
             text += f'Rozmiar: {os.path.getsize(path)} bajtów\n'
             text += f'Data edycji: {self.__get_formated_modified_date(path)}\n'
-            if platform == "linux" or platform == "linux2":
+            if sys.platform == "linux" or sys.platform == "linux2":
                 text += f'Właściciel: {getpwuid(file_stats.st_uid).pw_name}\n'
             text += f'Uprawnienia: {stat.filemode(file_stats.st_mode)}'
             return text
