@@ -90,14 +90,14 @@ class FilesTree():
                 item_modified_date = date_time.strftime("%d.%m.%Y %H:%M")
                 current_iter = tree_store.append(parent, 
                     [item, item_full_name, item_size, item_modified_date, item_size_in_bytes, timestamp])
-
+         
                 if item_is_folder: tree_store.append(
                     current_iter, 
                     [None, None, None, None, None, None]
                 )
 
                 itemCounter += 1
-     
+
             if itemCounter < 1: tree_store.append(parent, [None, None, None, None, None, None])
         except PermissionError:
             pass
@@ -132,13 +132,13 @@ class FilesTree():
             tree_store.remove(current_child_iter)
             current_child_iter = tree_store.iter_children(tree_iter)
 
-        tree_store.append(tree_iter, [None, None, None, None])
+        tree_store.append(tree_iter, [None, None, None, None, None, None])
 
     def __on_row_selected(self, tree_view, tree_path, view_column):
         tree_store = tree_view.get_model()
 
         path = tree_store.get_value(tree_store.get_iter(tree_path), 1)
-        if os.path.isfile(path):
+        if isinstance(path, str) and os.path.isfile(path):
             try:
                 with open(path, 'r') as myfile:
                     data = myfile.read()
@@ -283,7 +283,7 @@ class FilesTree():
         self.__path = path
         # Displayed name, full path, size, date of last edit date, size in bytes, timestamp
         # The last two columns are just for sorting purposes
-        self.fileSystemtree_store = Gtk.TreeStore(str, str, str, str, int, int)
+        self.fileSystemtree_store = Gtk.TreeStore(str, str, str, str, float, int)
 
         self.__populate_file_system_tree(self.fileSystemtree_store, path)
 
