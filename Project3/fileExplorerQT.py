@@ -79,9 +79,20 @@ class Browser(QWidget):
     def __open_file_name_dialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName = str(QFileDialog.getExistingDirectory(self,"Wybierz folder", options=options))
-        if fileName:
-            return fileName
+        file_dialog = QFileDialog()
+        file_dialog.setOptions(options)
+        file_dialog.setFileMode(QFileDialog.Directory)
+        file_dialog.setWindowTitle("Wybierz folder")
+        file_dialog.setLabelText(QFileDialog.LookIn, self.tr("Szukaj w:"))
+        file_dialog.setLabelText(QFileDialog.FileName, self.tr("Nazwa:"))
+        file_dialog.setLabelText(QFileDialog.FileType, self.tr("Filtry:"))
+        file_dialog.setLabelText(QFileDialog.Accept, self.tr("Wybierz"))
+        file_dialog.setLabelText(QFileDialog.Reject, self.tr("Anuluj"))
+
+        file_dialog.exec()
+        selected_files = file_dialog.selectedFiles()
+        if selected_files and len(selected_files) > 0:
+            return selected_files[0]
         return None
 
     def set_new_directory(self):
