@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artykuły</title>
-</head>
-<body>
-    <h1>Artykuły</h1>
-</body>
-</html>
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<main>
+    <header>
+        <h1>Artykuły</h1>
+    </header>
+    <section>
+        {% for article in articles %}
+        <article class="article">
+            <header class="article__title">
+                <a href="{% url 'articles:detail' slug=article.slug %}">
+                    <h2>{{article.title}}</h2>
+                </a>
+            </header>
+            <span class="article__timestamp">{{article.timestamp}}</span>
+            <p class="article__snippet">{{article.snippet}}</p>
+        </article>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}
