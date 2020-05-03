@@ -7,5 +7,6 @@ app_name = 'articles'
 
 urlpatterns = [
     path('', views.article_list, name='list'),
-    url(r'^(?P<slug>[\w-]+)/$', views.article_detail, name='detail')
+    path('new/', views.article_new, name='new'),
+    url(r'^(?P<slug>[\w-]+)/$', views.article_detail, name='detail'),
 ]

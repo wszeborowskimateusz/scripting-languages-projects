@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<main>
+    <header>
+        <h1>Zaloguj się</h1>
+    </header>
+    <section>
+        <form class="site-form" action="{% url 'accounts:login' %}" method="POST">
+            {% csrf_token %}
+            {{ login_form }}
+            {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{request.GET.next}}"></input>
+                <p>Aby przejść do tej strony najpierw musisz się zalogować</p>
+            {% endif %}
+            <input type="submit" value="Zaloguj się">
+        </form>
+    </section>
+</main>
+{% endblock %}
