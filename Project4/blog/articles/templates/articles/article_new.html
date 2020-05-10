@@ -6,7 +6,11 @@
         <h1>Dodaj nowy wpis</h1>
     </header>
     <section>
-        <form action="" method="post"></form>
+        <form class='site-form' action="{% url 'articles:new' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Dodaj artykuł">
+        </form>
     </section>
 </main>
 {% endblock %}

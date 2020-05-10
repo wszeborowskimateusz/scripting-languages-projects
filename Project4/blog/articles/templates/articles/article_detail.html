@@ -2,12 +2,16 @@
 
 {% block content %}
 <main>
-    <header>
-        <h1>{{article.title}}</h1>
-    </header>
-    <section>
-        <span class="article__timestamp">{{article.timestamp}}</span>
-        <p class="article__snippet">{{article.content}}</p>
-    </section>
+    <div class="article_detail">
+        <div class="article">
+            <header>
+                <h1>{{article.title}}</h1>
+            </header>
+            <section class="article_detail">
+                <span class="article__timestamp">{{article.timestamp}}</span>
+                <p class="article__snippet">{{article.content}}</p>
+            </section>
+        </div>
+    </div>
 </main>
 {% endblock %}

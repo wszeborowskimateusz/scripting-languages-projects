@@ -6,31 +6,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </link>
     <title>Mój blog</title>
 </head>
 
 <body>
-    <div class="wrapper">
-        <h1>
-            <a href="{% url 'articles:list' %}">
-                <img src="{% static 'logo.png' %}" />
-            </a>
-        </h1>
+    <header class="wrapper">
+        <h1><a href="{% url 'home' %}"><img src="{% static 'logo.png' %}" alt="websited" /></a></h1>
         <nav>
             <ul>
+                {% if user.is_authenticated %}
                 <li>
                     <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Wyloguj się</button>
-                    </form> 
+                        <button type="submit">Logout</button>
+                    </form>
                 </li>
+                <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
+                <li><a href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
+                {% endif %}
             </ul>
         </nav>
+    </header>
+    <div class="wrapper">
         {% block content %}
         {% endblock %}
     </div>
+
+
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
 </body>
 
 </html>
