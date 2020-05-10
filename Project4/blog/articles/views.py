@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from .models import Article
-from .forms import CreateArticle
+from .models import Article, Comment, Reaction
+from .forms import CreateArticle, CreateComment
 
 
 def article_list(request):
@@ -26,5 +26,25 @@ def article_new(request):
 
 
 def article_detail(request, slug):
-    article = Article.objects.get(slug=slug)
-    return render(request, "articles/article_detail.html", {'article': article})
+    article = get_object_or_404(Article, slug=slug)
+    comments = Comment.objects.all().filter(article=article)
+    reactions = Reaction.objects.all().filter(article=article)
+
+
+    if request.method == 'POST':
+        commentForm = CreateComment(request.POST)
+        if commentForm.is_valid():
+            comment = commentForm.save(commit=False)
+            comment.author = request.user
+            comment.article = article
+            comment.save()
+            return redirect('articles:detail', slug=slug)
+    else:
+        commentForm = CreateComment()
+    return render(request, "articles/article_detail.html", 
+        {'article': article, 'comments': comments, 'commentForm': commentForm, 'reactions': reactions})
+
+def add_reaction(request, slug):
+    article = get_object_or_404(Article, slug=slug)
+    print("Adding this reaction")
+    return redirect('articles:detail', slug=slug)

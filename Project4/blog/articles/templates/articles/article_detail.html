@@ -8,10 +8,35 @@
                 <h1>{{article.title}}</h1>
             </header>
             <section class="article_detail">
-                <span class="article__timestamp">{{article.timestamp}}</span>
+                <div class="mb-3">{{article.timestamp}}</div>
                 <p class="article__snippet">{{article.content}}</p>
             </section>
         </div>
     </div>
+    {% if user.is_authenticated %}
+
+    {% endif %}
+    <h2 class="py-2">Komentarze:</h2>
+    <div class="article_comments">
+        {% for comment in comments%}
+        <div class="border p-2 my-4">
+            <h5>Autor: {{comment.author}}</h2>
+                <h6>{{comment.timestamp}}</h6>
+                <h5>Treść: {{comment.content}}</h3>
+                    {% if comment.author == user%}
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-danger m-2">Usuń komentarz</button>
+                    </div>
+                    {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <form class="site-form comment-form my-3" method="post" action="{% url 'articles:detail' slug=article.slug %}">
+        {% csrf_token %}
+        {{commentForm}}
+        <input type="submit" value="Dodaj komentarz">
+    </form>
+    {% endif %}
 </main>
 {% endblock %}

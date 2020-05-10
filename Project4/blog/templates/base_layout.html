@@ -23,13 +23,14 @@
                 <li>
                     <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Logout</button>
+                        <button type="submit">Wyloguj się</button>
                     </form>
                 </li>
                 {% if user.is_superuser %}
                     <li><a href="{% url 'admin:index' %}">Panel Administracyjny</a></li>
+                    <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
                 {% endif %}
-                <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
+                
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
                 <li><a href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
@@ -37,7 +38,7 @@
             </ul>
         </nav>
     </header>
-    <div class="wrapper">
+    <div class="wrapper my-5">
         {% block content %}
         {% endblock %}
     </div>

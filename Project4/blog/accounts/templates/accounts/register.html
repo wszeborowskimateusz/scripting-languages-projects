@@ -2,15 +2,15 @@
 
 {% block content %}
 <main>
-    <header>
-        <h1>Zarejestruj się</h1>
+    <header class="justify-content-center">
+        <h1 >Zarejestruj się</h1>
     </header>
-    <section>
+    <div class="">
         <form class="site-form" action="{% url 'accounts:register' %}" method="POST">
             {% csrf_token %}
             {{ register_form }}
             <input type="submit" value="Zarejestruj się">
         </form>
-    </section>
+    </div>
 </main>
 {% endblock %}

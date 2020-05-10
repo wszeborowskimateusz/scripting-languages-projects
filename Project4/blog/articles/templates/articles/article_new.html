@@ -1,5 +1,5 @@
 {% extends 'base_layout.html' %}
-
+{% load static %}
 {% block content %}
 <main>
     <header>
@@ -12,5 +12,6 @@
             <input type="submit" value="Dodaj artykuł">
         </form>
     </section>
+    <script src="{% static 'js/slugify.js' %}"></script>
 </main>
 {% endblock %}

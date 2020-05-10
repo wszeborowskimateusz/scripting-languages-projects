@@ -71,10 +71,6 @@ nav button{
     padding: 0;
 }
 
-.article-detail  .article img{
-    max-width: 100%;
-}
-
 .article-detail  .article h2{
     text-align: center;
     margin: 20px auto;
@@ -99,6 +95,11 @@ nav button{
     display: block;
     margin: 20px 0 0px 0;
     padding: 10px;
+}
+
+.comment-form textarea{
+    width: 100%;
+    resize: none;
 }
 
 a.highlight{
