@@ -26,6 +26,9 @@
                         <button type="submit">Logout</button>
                     </form>
                 </li>
+                {% if user.is_superuser %}
+                    <li><a href="{% url 'admin:index' %}">Panel Administracyjny</a></li>
+                {% endif %}
                 <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
