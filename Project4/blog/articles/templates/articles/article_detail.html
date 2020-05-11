@@ -1,4 +1,5 @@
 {% extends 'base_layout.html' %}
+{% load static %}
 
 {% block content %}
 <main>
@@ -14,7 +15,41 @@
         </div>
     </div>
     {% if user.is_authenticated %}
-
+    <div class="row my-3">
+        <div class="col-4 text-center">
+            <form class="" action="{% url 'articles:add_reaction' slug=article.slug reaction_type='positive'%}"
+                method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">
+                    <p>Szczęśliwy</p>
+                    <p>({{happyReactions|length}})</p>
+                    <img src="{% static 'happy.png' %}" alt="szczęśliwy">
+                </button>
+            </form>
+        </div>
+        <div class="col-4 text-center">
+            <form class="" action="{% url 'articles:add_reaction' slug=article.slug reaction_type='neutral'%}"
+                method="post">
+                {% csrf_token %}
+                <button class="btn btn-secondary">
+                    <p>Neutralny</p>
+                    <p>({{neutralReactions|length}})</p>
+                    <img src="{% static 'neutral.png' %}" alt="neutralny">
+                </button>
+            </form>
+        </div>
+        <div class="col-4 text-center">
+            <form class="" action="{% url 'articles:add_reaction' slug=article.slug reaction_type='negative' %}"
+                method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger">
+                    <p>Smutny</p>
+                    <p>({{sadReactions|length}})</p>
+                    <img src="{% static 'sad.png' %}" alt="smutny">
+                </button>
+            </form>
+        </div>
+    </div>
     {% endif %}
     <h2 class="py-2">Komentarze:</h2>
     <div class="article_comments">
@@ -23,9 +58,13 @@
             <h5>Autor: {{comment.author}}</h2>
                 <h6>{{comment.timestamp}}</h6>
                 <h5>Treść: {{comment.content}}</h3>
-                    {% if comment.author == user%}
+                    {% if comment.author == user or user.is_superuser %}
                     <div class="d-flex flex-row-reverse">
-                        <button class="btn btn-danger m-2">Usuń komentarz</button>
+                        <form class="" action="{% url 'articles:delete_comment' comment_id=comment.id %}" method="post"
+                            onsubmit="return confirm('Czy na pewno chcesz usunąć ten komentarz?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger m-2">Usuń komentarz</button>
+                        </form>
                     </div>
                     {% endif %}
         </div>

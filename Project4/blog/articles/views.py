@@ -27,9 +27,11 @@ def article_new(request):
 
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug)
-    comments = Comment.objects.all().filter(article=article)
+    comments = Comment.objects.all().filter(article=article).order_by('-timestamp')
     reactions = Reaction.objects.all().filter(article=article)
-
+    positiveReactions = reactions.filter(reaction_type=Reaction.ReactionType.HAPPY)
+    neutralReactions = reactions.filter(reaction_type=Reaction.ReactionType.NEUTRAL)
+    negativeReactions = reactions.filter(reaction_type=Reaction.ReactionType.SAD)
 
     if request.method == 'POST':
         commentForm = CreateComment(request.POST)
@@ -42,9 +44,36 @@ def article_detail(request, slug):
     else:
         commentForm = CreateComment()
     return render(request, "articles/article_detail.html", 
-        {'article': article, 'comments': comments, 'commentForm': commentForm, 'reactions': reactions})
+        {'article': article, 'comments': comments, 'commentForm': commentForm, 
+        'happyReactions': positiveReactions, 'neutralReactions': neutralReactions, 'sadReactions': negativeReactions})
 
-def add_reaction(request, slug):
-    article = get_object_or_404(Article, slug=slug)
-    print("Adding this reaction")
-    return redirect('articles:detail', slug=slug)
+@login_required(login_url='/accounts/login/')
+def add_reaction(request, reaction_type, slug):
+    if request.method == 'POST':
+        article = get_object_or_404(Article, slug=slug)
+        try:
+            # If user already gave a reaction to this post this will not throw exception
+            reaction = Reaction.objects.all().filter(article=article, author=request.user)
+            reaction.delete()
+        except Reaction.DoesNotExist:
+            pass
+
+        if reaction_type == 'positive':
+            r_type = Reaction.ReactionType.HAPPY
+        elif reaction_type == 'neutral': 
+            r_type = Reaction.ReactionType.NEUTRAL
+        elif reaction_type == 'negative':
+            r_type = Reaction.ReactionType.SAD
+        new_reaction = Reaction(article=article, author=request.user, reaction_type=r_type)
+        new_reaction.save()
+
+        print(f"Got reaction: {reaction_type} to article with slug {slug} from user {request.user}")
+        return redirect('articles:detail', slug=slug)
+
+@login_required(login_url='/accounts/login/')
+def delete_comment(request, comment_id):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, id=comment_id)
+        slug = comment.article.slug 
+        comment.delete()
+        return redirect('articles:detail', slug=slug)

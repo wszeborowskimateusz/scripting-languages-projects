@@ -27,10 +27,10 @@
                     </form>
                 </li>
                 {% if user.is_superuser %}
-                    <li><a href="{% url 'admin:index' %}">Panel Administracyjny</a></li>
-                    <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
+                <li><a href="{% url 'admin:index' %}">Panel Administracyjny</a></li>
+                <li><a href="{% url 'articles:new' %}" class="highlight">Nowy artykuł</a></li>
                 {% endif %}
-                
+
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Zaloguj się</a></li>
                 <li><a href="{% url 'accounts:register' %}">Zarejestruj się</a></li>
@@ -38,11 +38,18 @@
             </ul>
         </nav>
     </header>
-    <div class="wrapper my-5">
+    <div class="wrapper my-5 pb-5">
         {% block content %}
         {% endblock %}
     </div>
 
+
+    <footer class="page-footer font-small blue navbar fixed-bottom row bg-dark">
+        <div class="footer-copyright text-center py-3 col-6 offset-3">© 2020:
+            <a href="https://github.com/wszeborowskimateusz/"> Mateusz Wszeborowski 165562 | </a>
+            <a href="https://icons8.com/"> Ikonki</a>
+        </div>
+    </footer>
 
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
