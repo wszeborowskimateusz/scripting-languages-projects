@@ -12,10 +12,11 @@ def article_list(request):
 
 @login_required(login_url='/accounts/login/')
 def article_edit(request, id=None):
+    if not request.user.is_superuser:
+        return HttpResponseForbidden()
     if id:
         is_edit = True
         article = get_object_or_404(Article, id=id)
-        print(f"I am trying to edit article with id = {article.id}")
     else:
         is_edit = False
         article = Article(author=request.user)
@@ -39,6 +40,8 @@ def article_detail(request, slug):
     if request.method == 'POST':
         commentForm = CreateComment(request.POST)
         if commentForm.is_valid():
+            if not request.user.is_authenticated:
+                return HttpResponseForbidden()
             comment = commentForm.save(commit=False)
             comment.author = request.user
             comment.article = article
@@ -60,7 +63,7 @@ def add_reaction(request, reaction_type, slug):
             reaction.delete()
         except Reaction.DoesNotExist:
             pass
-
+        
         if reaction_type == 'positive':
             r_type = Reaction.ReactionType.HAPPY
         elif reaction_type == 'neutral': 
@@ -77,6 +80,8 @@ def add_reaction(request, reaction_type, slug):
 def delete_comment(request, comment_id):
     if request.method == 'POST':
         comment = get_object_or_404(Comment, id=comment_id)
+        if (not request.user.is_superuser) and (comment.author != request.user):
+            return HttpResponseForbidden()
         slug = comment.article.slug 
         comment.delete()
         return redirect('articles:detail', slug=slug)
