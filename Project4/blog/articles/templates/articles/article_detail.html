@@ -8,6 +8,16 @@
             <header>
                 <h1>{{article.title}}</h1>
             </header>
+            {% if user.is_superuser %}
+            <div class="float-right">
+                <form class="" action="{% url 'articles:delete_article' article_id=article.id %}" method="post"
+                    onsubmit="return confirm('Czy na pewno chcesz usunąć ten artykuł?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger m-2">Usuń artykuł</button>
+                </form>
+            </div>
+            <a class="btn btn-warning mb-2" href="{% url 'articles:edit' id=article.id %}">Edytuj</a>
+            {% endif %}
             <section class="article_detail">
                 <div class="mb-3">{{article.timestamp}}</div>
                 <p class="article__snippet">{{article.content}}</p>

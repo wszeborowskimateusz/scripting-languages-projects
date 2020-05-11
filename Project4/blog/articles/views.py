@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 
 from .models import Article, Comment, Reaction
@@ -7,22 +7,25 @@ from .forms import CreateArticle, CreateComment
 
 
 def article_list(request):
-    articles = Article.objects.all().order_by('timestamp')
+    articles = Article.objects.all().order_by('-timestamp')
     return render(request, "articles/article_list.html", {'articles': articles})
 
 @login_required(login_url='/accounts/login/')
-def article_new(request):
-    if request.method == 'POST':
-        form = CreateArticle(request.POST)
-        if form.is_valid():
-            # Save to DB
-            article = form.save(commit=False)
-            article.author = request.user
-            article.save()
-            return redirect('articles:list')
+def article_edit(request, id=None):
+    if id:
+        is_edit = True
+        article = get_object_or_404(Article, id=id)
+        print(f"I am trying to edit article with id = {article.id}")
     else:
-        form = CreateArticle()
-    return render(request, "articles/article_new.html", {'form': form})
+        is_edit = False
+        article = Article(author=request.user)
+    form = CreateArticle(request.POST or None, instance=article)
+    if request.method == 'POST' and form.is_valid():
+        # Save to DB
+        new_article = form.save(article)
+        return redirect('articles:list')
+
+    return render(request, "articles/article_new.html", {'form': form, 'is_edit': is_edit, 'article': article})
 
 
 def article_detail(request, slug):
@@ -77,3 +80,12 @@ def delete_comment(request, comment_id):
         slug = comment.article.slug 
         comment.delete()
         return redirect('articles:detail', slug=slug)
+
+@login_required(login_url='/accounts/login/')
+def delete_article(request, article_id):
+    if request.method == 'POST':
+        if not request.user.is_superuser:
+            return HttpResponseForbidden()
+        article = get_object_or_404(Article, id=article_id)
+        article.delete()
+        return redirect('articles:list')

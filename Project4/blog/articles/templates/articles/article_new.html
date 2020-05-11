@@ -3,14 +3,26 @@
 {% block content %}
 <main>
     <header>
+        {% if is_edit %}
+        <h1>Edytuj artykuł</h1>
+        {% else %}
         <h1>Dodaj nowy wpis</h1>
+        {% endif %}
     </header>
     <section>
+        {% if is_edit %}
+        <form class='site-form' action="{% url 'articles:edit' id=article.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Edytuj">
+        </form>
+        {% else %}
         <form class='site-form' action="{% url 'articles:new' %}" method="post">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Dodaj artykuł">
         </form>
+        {% endif %}
     </section>
     <script src="{% static 'js/slugify.js' %}"></script>
 </main>
